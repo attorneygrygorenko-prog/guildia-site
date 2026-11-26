@@ -33,7 +33,7 @@
   // ───── розмітка й стилі ─────
   const css = document.createElement('style');
   css.textContent = `
-  .mt{position:fixed;left:0;top:0;z-index:60;width:var(--ms,128px);height:var(--mh,119px);cursor:pointer;will-change:transform;touch-action:manipulation}
+  .mt{position:fixed;left:0;top:0;z-index:60;width:var(--ms,140px);height:var(--mh,140px);cursor:pointer;will-change:transform;touch-action:manipulation}
   .mt-shadow{position:absolute;left:18%;right:18%;bottom:-4px;height:12px;border-radius:50%;
     background:radial-gradient(closest-side,rgba(11,29,63,.32),rgba(11,29,63,0));will-change:transform,opacity}
   .mt-flip,.mt-motion,.mt-pose{position:absolute;inset:0;transform-origin:50% 92%;will-change:transform}
@@ -60,7 +60,7 @@
     font:700 14px/24px system-ui;cursor:pointer;opacity:0;transition:opacity .2s;z-index:2}
   .mt:hover .mt-x,.mt:focus-within .mt-x{opacity:1}
   .mt-prop{position:fixed;left:0;top:0;z-index:61;font-size:24px;pointer-events:none;will-change:transform,opacity}
-  @media (max-width:760px){.mt{--ms:92px;--mh:86px}.mt-say{font-size:12.5px;width:200px}}`;
+  @media (max-width:760px){.mt{--ms:100px;--mh:100px}.mt-say{font-size:12.5px;width:200px}}`;
   document.head.appendChild(css);
 
   const el = document.createElement('div');
@@ -72,9 +72,17 @@
     <button class="mt-x" aria-label="Сховати маскота">×</button>
     <div class="mt-shadow"></div>
     <div class="mt-flip"><div class="mt-motion"><div class="mt-pose">
-      <img src="assets/mascot.png" alt="Мартин Гільдієвич — маскот Південної правозахисної гільдії"></div></div></div>`;
+      <img src="assets/mascot-idle.png" alt="Мартин Гільдієвич — маскот Південної правозахисної гільдії"></div></div></div>`;
   document.body.appendChild(el);
   const $ = (s) => el.querySelector(s);
+  const IDLE = 'assets/mascot-idle.png', WALK = 'assets/mascot-walk.webp';
+  new Image().src = WALK;                                   // попереднє завантаження циклу кроку
+  let sprite = 'idle';
+  const setSprite = (kind) => {                             // справжній цикл кроку з відео під час ходьби
+    if (kind === sprite) return;
+    sprite = kind;
+    el.querySelector('img').src = kind === 'walk' ? WALK : IDLE;
+  };
   const flipEl = $('.mt-flip'), motionEl = $('.mt-motion'), poseEl = $('.mt-pose'), shadowEl = $('.mt-shadow'), sayEl = $('.mt-say');
 
   // ───── стан ─────
@@ -153,7 +161,7 @@
     const mx = (st.x + tx) / 2, my = (st.y + ty) / 2;
     st.ctrl = fly ? { x: mx, y: Math.min(st.y, ty) - Math.min(260, dist * 0.45) }        // дуга вгору
                   : { x: mx + (Math.random() - 0.5) * dist * 0.35, y: my + (Math.random() - 0.5) * 60 };
-    st.dur = fly ? Math.min(5200, 1600 + dist * 3.2) : Math.min(9000, 1400 + dist * 8);
+    st.dur = fly ? Math.min(5200, 1600 + dist * 3.2) : Math.min(14000, 1200 + dist * 11);   // темп під довжину кроку з відео
     if (Math.abs(dx) > 8) st.face = dx > 0 ? 1 : -1;
     st.pending = st.mode;                    // спершу — замах (антиципація), потім рух
     st.mode = 'antic'; st.anticT0 = now;
@@ -187,20 +195,19 @@
       st.y = bez(st.from.y, st.ctrl.y, st.to.y, e);
       const speed = Math.min(1, Math.sin(k * Math.PI) * 1.6);    // розгін → крейсерський темп → гальмування
       if (st.mode === 'walk') {
-        const ph = time * 8.2;                                    // темп кроків
-        bobY = -Math.abs(Math.sin(ph)) * 3.2 * speed;             // два «підскоки» на крок, як у людини
-        const sway = Math.sin(ph) * 1.6 * speed;                  // перенесення ваги з ноги на ногу
-        rot = 4.5 * speed * st.face + sway;                       // корпус нахилений уперед у бік руху
-        sy = 1 + Math.abs(Math.cos(ph)) * 0.012 * speed;          // легке «розтягнення» на кроці
+        setSprite('walk');                                        // ноги й корпус рухає сам цикл з відео
+        rot = 1.5 * speed * st.face;                              // ледь помітний нахил у бік руху
       } else {
+        setSprite('idle');
         const ph = time * 12;
         lift = speed * 26;
         sy = 1 + Math.sin(ph) * 0.03 * speed;                     // змахи
         sx = 1 - Math.sin(ph) * 0.018 * speed;
         rot = 9 * speed * st.face + Math.sin(ph * 0.5) * 2 * speed;   // «супергеройський» нахил у польоті
       }
-      if (k >= 1) arrive(now);
+      if (k >= 1) { arrive(now); setSprite('idle'); }
     } else {
+      if (st.mode !== 'antic') setSprite('idle');
       if (st.mode === 'land') {                                    // м'яка посадка: присід і пружинка
         const k = Math.min(1, (now - st.landT0) / 560);
         const s1 = Math.sin(k * Math.PI) * (1 - k * 0.4);
