@@ -75,14 +75,23 @@
       <img src="assets/mascot-idle.png" alt="Мартин Гільдієвич — маскот Південної правозахисної гільдії"></div></div></div>`;
   document.body.appendChild(el);
   const $ = (s) => el.querySelector(s);
-  const IDLE = 'assets/mascot-idle.png', WALK = 'assets/mascot-walk.webp';
+  const IDLE = 'assets/mascot-idle.png', WALK = 'assets/mascot-walk.webp', PARTY = 'assets/mascot-celebrate.webp';
   new Image().src = WALK;                                   // попереднє завантаження циклу кроку
+  let partyReady = false;
+  setTimeout(() => { const im = new Image(); im.onload = () => (partyReady = true); im.src = PARTY; }, 30000);   // святкова сцена — у фоні
   let sprite = 'idle';
-  const setSprite = (kind) => {                             // справжній цикл кроку з відео під час ходьби
-    if (kind === sprite) return;
+  const setSprite = (kind, force) => {                      // справжні сцени з відео: крок, свято
+    if (kind === sprite || (sprite === 'party' && !force)) return;
     sprite = kind;
-    el.querySelector('img').src = kind === 'walk' ? WALK : IDLE;
+    el.querySelector('img').src = kind === 'walk' ? WALK : kind === 'party' ? PARTY + '?t=' + Date.now() : IDLE;
   };
+  function celebrate() {                                    // молоток, конфеті, окуляри — анфас, ~10 с
+    st.acting = true; st.face = 1;
+    setSprite('party', true);
+    say('Оце цимес! Ще одна перемога гільдії. Таки-да! 😎', 7000);
+    setTimeout(() => { setSprite('idle', true); st.acting = false; }, 10000);
+    return 10000;
+  }
   const flipEl = $('.mt-flip'), motionEl = $('.mt-motion'), poseEl = $('.mt-pose'), shadowEl = $('.mt-shadow'), sayEl = $('.mt-say');
 
   // ───── стан ─────
@@ -131,6 +140,7 @@
   }
 
   function activity() {
+    if (partyReady && Math.random() < 0.14) return celebrate();
     const a = ACTS[Math.floor(Math.random() * ACTS.length)];
     const r = rect();
     st.acting = true;
@@ -231,6 +241,7 @@
     if (kt < 1 && st.mode !== 'fly') rot += Math.sin(kt * 26) * 2.2 * (1 - kt);
 
     // плавний розворот (стиснення через вузький профіль замість миттєвого віддзеркалення)
+    if (sprite === 'party') st.face = 1;
     st.faceShown += (st.face - st.faceShown) * Math.min(1, dt / 90);
     const fs = Math.abs(st.faceShown) < 0.08 ? 0.08 * Math.sign(st.faceShown || 1) : st.faceShown;
 
