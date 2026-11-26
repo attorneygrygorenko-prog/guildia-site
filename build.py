@@ -21,11 +21,11 @@ JSONLD = """<script type="application/ld+json">
 </script>""" % (SITE_URL, SITE_URL, SITE_URL, TG_CHANNEL)
 
 PERSON_LD = """<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Юрій Григоренко","jobTitle":"Юрист-правозахисник, антикорупціонер, голова ГО «Південна правозахисна гільдія»",
+{"@context":"https://schema.org","@type":"Person","name":"Юрій Григоренко","jobTitle":"Юрист-правозахисник, антикорупціонер, голова ГО «Південна правозахисна гільдія»","image":"%sassets/hryhorenko.jpg",
  "worksFor":{"@type":"NGO","name":"ГО «Південна правозахисна гільдія»"},"memberOf":{"@type":"Organization","name":"Національна асоціація адвокатів України"},
  "award":["Нагрудний знак «Захисник адвокатури України» (2022)","Почесна відзнака НААУ (2019)","Кращий молодий адвокат України (2017)"],
  "url":"%sholova.html"}
-</script>""" % SITE_URL
+</script>""" % (SITE_URL, SITE_URL)
 
 
 def page_hero(crumb, eyebrow, title, lead):
