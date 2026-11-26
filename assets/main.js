@@ -1,0 +1,11 @@
+  const burger=document.querySelector('.burger'),menu=document.querySelector('.menu');
+  burger.addEventListener('click',()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  document.getElementById('y').textContent=new Date().getFullYear();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const so=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;so.unobserve(e.target);
+    if(reduce)return;const el=e.target,to=+el.dataset.count,suf=el.dataset.suffix||'';const t0=performance.now();
+    const step=t=>{const p=Math.min((t-t0)/1200,1);el.textContent=Math.round(to*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}),{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>so.observe(el));
