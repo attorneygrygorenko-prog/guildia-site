@@ -245,3 +245,15 @@ footer{background:var(--navy-2);color:rgba(255,255,255,.65);padding:40px 0;font-
 .share a:hover{color:var(--red)}
 @media (max-width:760px){[data-stats]{grid-template-columns:1fr 1fr!important}}
 .brand img{filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+.doc-text{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:clamp(22px,4vw,40px);margin-top:24px;line-height:1.7}
+.doc-text h3{font-size:18px;margin:0 0 14px}
+.doc-list{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px}
+.doc-list li{padding-left:58px;position:relative}
+.doc-text .pn{font-weight:800;color:var(--navy);display:inline-block;min-width:50px}
+.doc-list .pn{position:absolute;left:0}
+.doc-sign{margin-top:22px;font-weight:700}
+.reg{width:100%;border-collapse:collapse;font-size:15px}
+.reg th,.reg td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.reg th{width:40%;color:var(--muted);font-weight:600}
+.doc-note{font-size:13px;color:var(--muted);margin-top:14px}
+@media (max-width:600px){.reg th{width:45%}.doc-list li{padding-left:50px}}
