@@ -52,7 +52,7 @@ def render(file, title, desc, body, extra_head=""):
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#132C5C">
 <link rel="icon" href="assets/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="canonical" href="{SITE_URL}{'' if file == 'index.html' else file}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
