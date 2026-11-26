@@ -96,6 +96,7 @@ def render(file, title, desc, body, extra_head=""):
 <script src="assets/reports.js"></script>
 <script src="assets/investigations.js"></script>
 <script src="assets/stats.js"></script>
+<script src="assets/mascot.js" defer></script>
 </body>
 </html>
 """
