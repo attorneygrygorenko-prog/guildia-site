@@ -58,7 +58,10 @@ def render(file, title, desc, body, extra_head=""):
 <meta property="og:site_name" content="Південна правозахисна гільдія">
 <meta property="og:title" content="{full_title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{SITE_URL}assets/logo-full.jpg">
+<meta property="og:image" content="{SITE_URL}assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
@@ -91,6 +94,7 @@ def render(file, title, desc, body, extra_head=""):
 <script src="assets/news.js"></script>
 <script src="assets/reports.js"></script>
 <script src="assets/investigations.js"></script>
+<script src="assets/stats.js"></script>
 </body>
 </html>
 """
@@ -107,7 +111,7 @@ directions_home = P("directions").replace("</div>\n  </div>\n</section>",
 
 render("index.html", "Південна правозахисна гільдія — громадська організація, Одеса",
        "ГО «Південна правозахисна гільдія» — правозахисники Півдня України, які з 2015 року захищають права людини, контролюють відкритість судів і домагаються прозорості влади.",
-       hero + P("home-about") + P("home-news") + directions_home + P("home-leader") + P("help") + P("join"), JSONLD)
+       hero + P("home-stats") + P("home-about") + P("home-news") + directions_home + P("home-leader") + P("help") + P("join"), JSONLD)
 
 render("pro-nas.html", "Про нас",
        "Місія, цінності, партнери та статутні документи ГО «Південна правозахисна гільдія».",

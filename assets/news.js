@@ -16,6 +16,14 @@
   };
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
 
+  const shareBar = (url, text) => {
+    const u = encodeURIComponent(url || location.href), t = encodeURIComponent((text || '').slice(0, 200));
+    return `<div class="share"><span>Поділитися:</span>
+      <a href="https://t.me/share/url?url=${u}&text=${t}" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener">Facebook</a>
+      <a href="viber://forward?text=${t}%20${u}">Viber</a>
+      <a href="#" onclick="navigator.clipboard&&navigator.clipboard.writeText(decodeURIComponent('${u}'));this.textContent='Скопійовано ✓';return false">Копіювати</a></div>`;
+  };
   function card(n) {
     return `<article class="news-card${n.local ? ' is-local' : ''}">
       <div class="news-meta"><time>${esc(fmt(n.date))}</time>${n.press ? '<span class="news-badge" style="background:var(--gold);color:var(--navy-2)">Заява гільдії</span>' : (n.local ? '<span class="news-badge">Одеса</span>' : '')}</div>
@@ -24,6 +32,7 @@
         ${n.source ? `<a href="${esc(n.source)}" target="_blank" rel="noopener">Джерело: ${esc(host(n.source))}</a>` : ''}
         ${n.tg ? `<a href="${esc(n.tg)}" target="_blank" rel="noopener">Обговорити в Telegram →</a>` : ''}
       </div>
+      ${shareBar(n.tg || location.href, (n.html||'').replace(/<[^>]+>/g,''))}
     </article>`;
   }
 
