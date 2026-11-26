@@ -244,3 +244,4 @@ footer{background:var(--navy-2);color:rgba(255,255,255,.65);padding:40px 0;font-
 .share a{color:var(--navy);font-weight:700;text-decoration:none}
 .share a:hover{color:var(--red)}
 @media (max-width:760px){[data-stats]{grid-template-columns:1fr 1fr!important}}
+.brand img{filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}

@@ -14,7 +14,7 @@ NAV = [("index.html", "Головна"), ("pro-nas.html", "Про нас"), ("di
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"NGO","name":"ГО «Південна правозахисна гільдія»",
  "alternateName":"Південна правозахисна гільдія","foundingDate":"2015-10-27","areaServed":"Південь України",
- "email":"guildia.odessa@gmail.com","url":"%s","logo":"%sassets/emblem.svg",
+ "email":"guildia.odessa@gmail.com","url":"%s","logo":"%sassets/emblem.png",
  "address":{"@type":"PostalAddress","streetAddress":"вул. Бугаївська, 21, офіс 701","addressLocality":"Одеса","postalCode":"65007","addressCountry":"UA"},
  "founder":{"@type":"Person","name":"Юрій Григоренко","jobTitle":"Голова організації, юрист-правозахисник, антикорупціонер","url":"%sholova.html"},
  "sameAs":["%s"]}
@@ -51,7 +51,8 @@ def render(file, title, desc, body, extra_head=""):
 <title>{full_title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#132C5C">
-<link rel="icon" href="assets/emblem.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="canonical" href="{SITE_URL}{'' if file == 'index.html' else file}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
@@ -72,7 +73,7 @@ def render(file, title, desc, body, extra_head=""):
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html">
-      <img src="assets/emblem.svg" alt="">
+      <img src="assets/emblem.png" alt="">
       <span><b>Південна</b><small>правозахисна гільдія</small></span>
     </a>
     <button class="burger" aria-label="Меню" aria-expanded="false">☰</button>
@@ -86,7 +87,7 @@ def render(file, title, desc, body, extra_head=""):
 {body}</main>
 <footer>
   <div class="wrap foot">
-    <a class="brand" href="index.html"><img src="assets/emblem.svg" alt="" style="width:30px"><span><b>Південна</b><small>правозахисна гільдія</small></span></a>
+    <a class="brand" href="index.html"><img src="assets/emblem.png" alt="" style="width:30px"><span><b>Південна</b><small>правозахисна гільдія</small></span></a>
     <span>ГО «Південна правозахисна гільдія» · запис у Реєстрі № 1449660 від 29.10.2015 · <a href="{TG_CHANNEL}" target="_blank" rel="noopener">Telegram</a> · <a href="privatnist.html">Персональні дані</a> · © <span id="y">2026</span></span>
   </div>
 </footer>
