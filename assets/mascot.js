@@ -155,6 +155,7 @@
   el.style.transition = 'none';
   el.style.transform = `translate(${x}px, ${y}px)`;
   requestAnimationFrame(() => { el.style.transition = ''; });
+  el.classList.add('edge-r');   // старт у правому куті — хмарка вліво
   setTimeout(() => say('Добрий день! Я Мартин Гільдієвич. Як шо порушили права — клацайте на мене.'), 1500);
   if (!reduce) timer = setTimeout(journey, 7000);
 
