@@ -62,7 +62,7 @@ def article(file, crumb, eyebrow, title, date, body, links, kind):
 
 
 def main():
-    urls = [(build.SITE_URL + ("" if f == "index.html" else f), None) for f, _ in build.NAV] + [(build.SITE_URL + "privatnist.html", None)]
+    urls = [(build.SITE_URL + ("" if f == "index.html" else f), None) for f, _ in build.NAV] + [(build.SITE_URL + p, None) for p in ("movchun.html", "privatnist.html")]
     news = load("news.json")
     for n in news:
         n["url"] = f"{NEWS_DIR}/{slug(n)}.html"

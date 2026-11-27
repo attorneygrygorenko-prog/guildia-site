@@ -89,7 +89,7 @@ def render(file, title, desc, body, extra_head="", og_type="website", og_image=N
 <footer>
   <div class="wrap foot">
     <a class="brand" href="index.html"><img src="assets/emblem.png" alt="" style="width:30px"><span><b>Південна</b><small>правозахисна гільдія</small></span></a>
-    <span>ГО «Південна правозахисна гільдія» · запис у Реєстрі № 1449660 від 29.10.2015 · <a href="{TG_CHANNEL}" target="_blank" rel="noopener">Telegram</a> · <a href="privatnist.html">Персональні дані</a> · © <span id="y">2026</span></span>
+    <span>ГО «Південна правозахисна гільдія» · запис у Реєстрі № 1449660 від 29.10.2015 · <a href="{TG_CHANNEL}" target="_blank" rel="noopener">Telegram</a> · <a href="movchun.html">Пан Мовчун</a> · <a href="privatnist.html">Персональні дані</a> · © <span id="y">2026</span></span>
   </div>
 </footer>
 <script src="assets/main.js"></script>
@@ -97,6 +97,7 @@ def render(file, title, desc, body, extra_head="", og_type="website", og_image=N
 <script src="assets/reports.js"></script>
 <script src="assets/investigations.js"></script>
 <script src="assets/stats.js"></script>
+<script src="assets/movchun.js"></script>
 <script src="assets/mascot.js" defer></script>
 </body>
 </html>
@@ -141,6 +142,12 @@ render("zvity.html", "Розслідування та звіти",
                  "Ми не просто читаємо новини — ми ставимо владі питання, вимагаємо документи й домагаємося відповідальності. Кожного місяця звітуємо публічно.")
        + P("reports"))
 
+render("movchun.html", "Пан Мовчун: хто не відповідає гільдії",
+       "Публічний лічильник органів влади Одеси, які не відповіли на запити та скарги ГО «Південна правозахисна гільдія» у встановлений законом строк.",
+       page_hero("Пан Мовчун", "Громадський контроль", "Пан Мовчун: хто мовчить у відповідь",
+                 "Органи влади, які не відповіли гільдії у строк, встановлений законом. Оновлюється автоматично.")
+       + P("movchun"))
+
 render("privatnist.html", "Політика обробки персональних даних",
        "Як ГО «Південна правозахисна гільдія» обробляє персональні дані заявників відповідно до Закону України «Про захист персональних даних».",
        page_hero("Персональні дані", "Конфіденційність", "Політика обробки персональних даних",
@@ -157,7 +164,7 @@ render("dopomoha.html", "Правова допомога",
        "Як отримати правову допомогу від ГО «Південна правозахисна гільдія»: звернення, Telegram-бот, відповіді на часті питання.",
        page_hero("Допомога", "Правова допомога", "Ми поруч, коли система не чує",
                  "Опишіть ситуацію — юристи гільдії підкажуть, що робити далі. Суспільно важливі справи беремо на системний супровід.")
-       + P("help").replace('style="padding-top:0"', '') + P("faq"))
+       + P("help").replace('style="padding-top:0"', '') + P("addbot") + P("faq"))
 
 render("kontakty.html", "Контакти",
        "Контакти ГО «Південна правозахисна гільдія»: Одеса, вул. Бугаївська, 21, офіс 701; guildia.odessa@gmail.com.",

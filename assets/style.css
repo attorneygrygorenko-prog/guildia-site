@@ -257,3 +257,25 @@ footer{background:var(--navy-2);color:rgba(255,255,255,.65);padding:40px 0;font-
 .reg th{width:40%;color:var(--muted);font-weight:600}
 .doc-note{font-size:13px;color:var(--muted);margin-top:14px}
 @media (max-width:600px){.reg th{width:45%}.doc-list li{padding-left:50px}}
+/* «Пан Мовчун» */
+.mv-intro{display:flex;gap:22px;align-items:center;margin-bottom:22px}
+.mv-intro img{width:120px;height:auto;flex:none}
+.mv-intro blockquote{margin:0;font-size:18px;font-weight:600;color:var(--navy);border-left:4px solid var(--gold);padding-left:16px}
+.mv-intro cite{display:block;margin-top:6px;font-size:14px;font-weight:500;color:var(--muted);font-style:normal}
+.mv-total{display:flex;gap:16px;align-items:baseline;background:var(--navy);color:#fff;border-radius:18px;padding:22px 26px;margin-top:22px}
+.mv-total b{font-family:Unbounded;font-size:clamp(36px,6vw,56px);color:var(--gold-2);line-height:1}
+.mv-rank{display:grid;gap:10px;margin-top:14px}
+.mv-row{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 16px;background:#fff}
+.mv-place{font-family:Unbounded;font-weight:700;color:var(--red)}
+.mv-name{font-weight:600;font-size:15px;margin-bottom:6px}
+.mv-bar{height:8px;border-radius:8px;background:linear-gradient(90deg,var(--red),var(--gold))}
+.mv-count{text-align:right}.mv-count b{font-family:Unbounded;font-size:22px;color:var(--navy);display:block}
+.mv-count small{color:var(--muted);font-size:12px}
+.mv-table-wrap{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:14px}
+.mv-table{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+.mv-table th,.mv-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.mv-table th{background:#F5F7FB;font-weight:700;color:var(--navy);white-space:nowrap}
+.mv-table small{color:var(--muted)}
+.mv-late{color:var(--red);font-weight:700;white-space:nowrap}
+.mv-note{color:var(--muted);font-size:14px;margin-top:16px}
+@media (max-width:640px){.mv-intro{flex-direction:column;text-align:center}.mv-intro blockquote{border-left:0;padding-left:0}.mv-total{flex-direction:column;gap:6px}}
