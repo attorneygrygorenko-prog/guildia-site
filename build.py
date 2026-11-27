@@ -38,7 +38,7 @@ def page_hero(crumb, eyebrow, title, lead):
 """
 
 
-def render(file, title, desc, body, extra_head=""):
+def render(file, title, desc, body, extra_head="", og_type="website", og_image=None):
     active = ' class="active" aria-current="page"'
     nav = "\n      ".join(
         f'<a href="{href}"{active if href == file else ""}>{label}</a>' for href, label in NAV)
@@ -47,6 +47,7 @@ def render(file, title, desc, body, extra_head=""):
 <html lang="uk">
 <head>
 <meta charset="utf-8">
+{'<base href="/">' if "/" in file else ''}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{full_title}</title>
 <meta name="description" content="{desc}">
@@ -54,12 +55,12 @@ def render(file, title, desc, body, extra_head=""):
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="canonical" href="{SITE_URL}{'' if file == 'index.html' else file}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{og_type}">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:site_name" content="Південна правозахисна гільдія">
 <meta property="og:title" content="{full_title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{SITE_URL}assets/og.png">
+<meta property="og:image" content="{og_image or SITE_URL + 'assets/og.png'}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -100,6 +101,7 @@ def render(file, title, desc, body, extra_head=""):
 </body>
 </html>
 """
+    (ROOT / file).parent.mkdir(parents=True, exist_ok=True)
     (ROOT / file).write_text(html, encoding="utf-8")
     print("✓", file)
 

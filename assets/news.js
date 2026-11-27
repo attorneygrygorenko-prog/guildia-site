@@ -30,6 +30,7 @@
       <div class="news-body"><p>${safe(n.html)}</p></div>
       <div class="news-links">
         ${n.source ? `<a href="${esc(n.source)}" target="_blank" rel="noopener">Джерело: ${esc(host(n.source))}</a>` : ''}
+        ${n.url ? `<a href="${esc(n.url)}">Читати повністю</a>` : ''}
         ${n.tg ? `<a href="${esc(n.tg)}" target="_blank" rel="noopener">Обговорити в Telegram →</a>` : ''}
       </div>
       ${shareBar(n.tg || location.href, (n.html||'').replace(/<[^>]+>/g,''))}
